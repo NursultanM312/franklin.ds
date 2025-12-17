@@ -1,0 +1,377 @@
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRANKLIN | Luxury Design Studio</title>
+    
+    <!-- Fonts: Playfair Display (Serif) & Manrope (Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Changed from Gold to Silver palette
+                        silver: {
+                            DEFAULT: '#D4D4D8', // Zinc-300 style silver
+                            dim: '#A1A1AA',     // Darker silver
+                            light: '#E4E4E7',   // Lighter silver
+                            glow: '#FFFFFF'     // For highlights
+                        },
+                        dark: '#050505',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Manrope"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        widest: '.25em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        
+        body {
+            background-color: #050505;
+            color: #D4D4D8;
+            overflow-x: hidden;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Logo Transitions */
+        #main-logo-svg {
+            transition: all 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* SVG Inner Animation */
+        .animated-logo {
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(350px); }
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<!-- Updated selection color to silver -->
+<body class="antialiased min-h-screen relative selection:bg-silver selection:text-black">
+
+    <!-- Canvas for Smoke Effect (Updated for Silver smoke) -->
+    <canvas id="smokeCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40 mix-blend-screen"></canvas>
+    
+    <!-- Noise Grain -->
+    <div class="noise-overlay"></div>
+
+    <!-- Border Frame (Silver) -->
+    <div class="fixed inset-4 sm:inset-8 border border-silver/20 z-40 pointer-events-none"></div>
+
+    <!-- Animated Logo Container -->
+    <div id="logo-container" class="fixed z-50 w-full h-full pointer-events-none flex items-center justify-center top-0 left-0 transition-all duration-1000 ease-in-out">
+        <svg id="main-logo-svg" class="h-64 w-auto drop-shadow-2xl" viewBox="0 0 265 513" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.6427 421.5V426.84H9.41156V429.078H2.6427V438.409H0V419.127H11.9196V421.5H2.6427ZM24.8592 438.409L19.722 430.13C19.1333 430.13 18.2029 430.085 16.931 430V438.409H14.2883V419.109C14.3869 419.109 15.07 419.078 16.3376 419.01C17.6095 418.943 18.5309 418.911 19.1109 418.911C23.7537 418.911 26.073 420.759 26.073 424.449C26.073 425.662 25.6997 426.755 24.9536 427.725C24.2076 428.696 23.3223 429.298 22.293 429.537L27.8798 438.409H24.8592ZM16.931 421.469V427.761C17.5603 427.847 18.176 427.892 18.7738 427.892C20.3513 427.892 21.4973 427.636 22.2165 427.128C22.9356 426.615 23.2953 425.703 23.2953 424.39C23.2953 423.307 22.9087 422.529 22.1402 422.053C21.367 421.577 20.1492 421.339 18.4816 421.339C18.2208 421.339 17.704 421.383 16.931 421.469ZM40.8242 438.409L39.4894 434.337H32.2755L30.8463 438.409H27.9068L35.7542 418.857H36.4554L43.7366 438.409H40.8242ZM35.9835 423.928L32.9767 432.395H38.7343L35.9835 423.928ZM58.2406 438.678L48.2626 424.575V438.409H45.7548V419.127H46.8065L56.5149 432.476V419.127H59.0227V438.678H58.2406ZM73.6166 438.409L68.1783 429.537L65.6073 433.182V438.409H62.9645V419.127H65.6073V429.622L72.7806 419.127H75.7202L69.9446 427.487L76.5292 438.409H73.6166ZM78.4887 438.409V419.127H81.1315V436.036H89.8421V438.409H78.4887ZM92.6016 438.409V419.127H95.2443V438.409H92.6016ZM112.135 438.678L102.157 424.575V438.409H99.6491V419.127H100.701L110.409 432.476V419.127H112.917V438.678H112.135ZM0.458252 469.723V450.441H3.10107V469.723H0.458252ZM20.7021 469.992L10.7243 455.888V469.723H8.21649V450.441H9.26807L18.9765 463.79V450.441H21.4843V469.992H20.7021ZM33.1752 452.814V469.723H30.5325V452.814H24.3839V450.441H39.5934V452.814H33.1752ZM45.1448 452.814V458.154H51.3742V460.392H45.1448V467.349H53.8823V469.723H42.5021V450.441H53.8823V452.814H45.1448ZM68.3642 469.723L63.227 461.444C62.6383 461.444 61.7079 461.313V469.723H57.7933V450.423C57.8919 450.423 58.5751 450.392 59.8427 450.324C61.1146 450.257 62.0359 450.225 62.6159 450.225C67.2587 450.225 69.578 452.072 69.578 455.763C69.578 456.976 69.2047 458.068 68.4586 459.039C67.7126 460.01 66.8273 460.612 65.798 460.85L71.3848 469.723H68.3642ZM60.436 452.783V459.075C61.0653 459.16 61.681 459.205 62.2788 459.205C63.8563 459.205 65.0024 458.949 65.7215 458.441C66.4407 457.929 66.8004 457.017 66.8004 455.704C66.8004 454.621 66.4137 453.843 65.6453 453.367C64.872 452.891 63.6542 452.652 61.9866 452.652C61.7258 452.652 61.209 452.697 60.436 452.783ZM74.5225 469.723V450.441H77.1653V469.723H74.5225ZM81.3636 459.911C81.3636 457.12 82.0649 454.787 83.4672 452.908C84.865 451.03 86.7571 450.09 89.1348 450.09C91.8136 450.09 93.8676 450.953 95.2968 452.684C96.7218 454.414 97.4364 456.823 97.4364 459.911C97.4364 463.08 96.7218 465.561 95.288 467.354C93.8585 469.147 91.8045 470.046 89.1348 470.046C86.7033 470.046 84.8021 469.098 83.4267 467.201C82.0513 465.309 81.3636 462.878 81.3636 459.911ZM84.1413 459.911C84.1413 462.122 84.5773 463.965 85.4492 465.448C86.3212 466.932 87.5528 467.673 89.1394 467.673C90.9326 467.673 92.3034 466.995 93.2473 465.633C94.1867 464.275 94.6587 462.365 94.6587 459.911C94.6587 454.945 92.8204 452.464 89.1394 452.464C87.5077 452.464 86.2673 453.129 85.4178 454.463C84.5682 455.799 84.1413 457.614 84.1413 459.911ZM111.869 469.723L106.731 461.444C106.143 461.444 105.212 461.399 103.94 461.313V469.723H101.298V450.423C101.396 450.423 102.079 450.392 103.347 450.324C104.619 450.257 105.54 450.225 106.12 450.225C110.763 450.225 113.082 452.072 113.082 455.763C113.082 456.976 112.709 458.068 111.963 459.039C111.217 460.01 110.332 460.612 109.302 460.85L114.889 469.723H111.869ZM103.94 452.783V459.075C104.57 459.16 105.185 459.205 105.783 459.205C107.361 459.205 108.507 458.949 109.226 458.441C109.945 457.929 110.305 457.017 110.305 455.704C110.305 454.621 109.918 453.843 109.15 453.367C108.376 452.891 107.159 452.652 105.491 452.652C105.23 452.652 104.713 452.697 103.94 452.783ZM3.88306 501.036H0V481.75C2.4763 481.665 4.05857 481.62 4.75507 481.62C7.44737 481.62 9.5822 482.438 11.1554 484.074C12.7241 485.71 13.5105 487.89 13.5105 490.609C13.5105 497.562 10.3013 501.036 3.88306 501.036ZM2.6427 484.123V498.533C3.2315 498.618 3.95505 498.663 4.82245 498.663C6.66075 498.663 8.10817 497.971 9.15527 496.591C10.207 495.212 10.7331 493.292 10.7331 490.834C10.7331 486.272 8.68788 483.993 4.59778 483.993C4.35508 483.993 3.7034 484.038 2.6427 484.123ZM25.1719 484.128V489.468H31.4012V491.706H25.1719V498.664H33.9094V501.037H22.5292V481.755H33.9094V484.128H25.1719ZM42.1013 500.147L43.063 497.72C43.5574 498.08 44.1731 498.381 44.9059 498.623C45.6429 498.866 46.2991 498.987 46.8788 498.987C47.908 498.987 48.7352 498.704 49.3599 498.142C49.9847 497.581 50.2993 496.866 50.2993 495.999C50.2993 495.347 50.1239 494.745 49.7778 494.187C49.4316 493.63 48.5555 493.023 47.1574 492.362L45.5978 491.639C44.2766 491.023 43.355 490.295 42.8337 489.455C42.3079 488.61 42.0471 487.594 42.0471 486.412C42.0471 484.969 42.5596 483.773 43.5798 482.825C44.6 481.877 45.9079 481.405 47.5126 481.405C49.6474 481.405 51.1353 481.751 51.9712 482.447L51.1937 484.748C50.843 484.493 50.3036 484.241 49.5844 484.002C48.861 483.764 48.1957 483.643 47.5801 483.643C46.6812 483.643 45.9754 483.899 45.4631 484.407C44.9461 484.915 44.6899 485.571 44.6899 486.371C44.6899 486.861 44.7841 487.31 44.9688 487.715C45.153 488.119 45.409 488.457 45.7373 488.726C46.0652 489 46.7441 489.383 47.7598 489.872L49.3418 490.628C50.6633 491.248 51.5846 491.994 52.1195 492.857C52.6498 493.724 52.9151 494.821 52.9151 496.156C52.9151 497.608 52.3306 498.835 51.1667 499.846C50.0025 500.857 48.4429 501.361 46.4924 501.361C44.78 501.361 43.3148 500.956 42.1013 500.147ZM62.3831 501.037V481.755H65.0259V501.037H62.3831ZM88.7958 483.077L87.7036 485.247C86.3776 484.268 85.0787 483.778 83.8068 483.778C81.7888 483.778 80.1978 484.488 79.029 485.913C77.8648 487.333 77.2806 489.216 77.2806 491.562C77.2806 493.792 77.8515 495.585 78.9976 496.947C80.1391 498.309 81.6945 498.987 83.6674 498.987C85.0697 498.987 86.2024 498.565 87.0698 497.724V493.216H84.4001V490.978H89.7125V499.374C89.0115 499.972 88.0316 500.448 86.7778 500.812C85.5192 501.176 84.3012 501.361 83.1146 501.361C80.4537 501.361 78.355 500.457 76.8132 498.655C75.2717 496.848 74.503 494.448 74.503 491.454C74.503 488.47 75.348 486.048 77.038 484.191C78.728 482.335 81.0113 481.405 83.8831 481.405C85.8923 481.405 87.5327 481.962 88.7958 483.077ZM112.134 501.306L102.156 487.203V501.037H99.6482V481.755H100.7L110.408 495.104V481.755H112.916V501.306H112.134Z" fill="url(#paint0_linear_2159_2511)"></path><path d="M264.659 512.424V507.007C247.044 506.744 229.165 499.079 211.024 479.36C200.77 468.317 182.048 445.69 159.437 413.35C149.081 399.112 132.864 386.478 117.1 379.122C140.801 380.223 169.587 376.184 183.846 361.91C197.314 349.683 206.691 332.253 207.286 312.342C207.658 299.855 205.668 289.956 197.173 274.207C178.366 246.519 154.59 243.725 123.847 243.725H47.5516L46.5614 253.15L91.1343 253.376C102.967 253.113 116.526 253.173 124.677 253.699C143.589 255.94 151.89 262.745 160.984 272.027C173.858 288.381 180.735 309.567 171.4 332.621C162.756 350.754 153.924 355.849 144.169 360.945C134.414 366.041 120.391 369.075 106.12 369.696H85.2177L85.2617 379.517C110.242 379.704 122.308 396.696 134.058 413.734C135.899 416.363 138.528 420.044 141.946 424.777L150.42 437.728C166.459 460.865 175.467 473.022 177.045 474.862C180.989 479.595 184.67 483.539 188.088 486.694C213.034 510.254 233.288 511.84 264.659 512.424Z" fill="url(#paint1_linear_2159_2511)"></path><path d="M180.195 43.1552H173.602V42.0188C173.9 21.2154 162.001 10.072 147.973 10.0367L118.974 9.964L78.4415 10.1191L78.2983 253.337L17.1332 253.182L16.9862 248.05L22.1153 248.006C36.1302 247.89 47.3649 238.463 47.3649 221.664L47.3323 29.5351C47.3323 16.6591 36.8747 5.1597 22.0827 5.087L16.957 5.0617L17.1332 0.0830002H132.73L179.678 0L180.195 43.1552Z" fill="url(#paint2_linear_2159_2511)"></path><path d="M110.007 135.881C100.538 135.881 92.8615 128.205 92.8615 118.736C92.8615 109.267 100.538 101.591 110.007 101.591C119.476 101.591 127.152 109.267 127.152 118.736C127.152 128.205 119.476 135.881 110.007 135.881Z" fill="url(#paint3_linear_2159_2511)"></path><mask id="mask0_2159_2511" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="16" y="0" width="249" height="513"><path d="M264.659 512.424V507.007C247.044 506.744 229.165 499.079 211.024 479.36C200.77 468.317 182.048 445.69 159.437 413.35C149.081 399.112 132.864 386.478 117.1 379.122C140.801 380.223 169.587 376.184 183.846 361.91C197.314 349.683 206.691 332.253 207.286 312.342C207.658 299.855 205.668 289.956 197.173 274.207C178.366 246.519 154.59 243.725 123.847 243.725H47.5516L46.5614 253.15L91.1343 253.376C102.967 253.113 116.526 253.173 124.677 253.699C143.589 255.94 151.89 262.745 160.984 272.027C173.858 288.381 180.735 309.567 171.4 332.621C162.756 350.754 153.924 355.849 144.169 360.945C134.414 366.041 120.391 369.075 106.12 369.696H85.2177L85.2617 379.517C110.242 379.704 122.308 396.696 134.058 413.734C135.899 416.363 138.528 420.044 141.946 424.777L150.42 437.728C166.459 460.865 175.467 473.022 177.045 474.862C180.989 479.595 184.67 483.539 188.088 486.694C213.034 510.254 233.288 511.84 264.659 512.424Z" fill="url(#paint4_linear_2159_2511)"></path><path d="M180.195 43.1552H173.602V42.0188C173.9 21.2154 162.001 10.072 147.973 10.0367L118.974 9.964L78.4415 10.1191L78.2983 253.337L17.1332 253.182L16.9862 248.05L22.1153 248.006C36.1302 247.89 47.3649 238.463 47.3649 221.664L47.3323 29.5351C47.3323 16.6591 36.8747 5.1597 22.0827 5.087L16.957 5.0617L17.1332 0.0830002H132.73L179.678 0L180.195 43.1552Z" fill="url(#paint5_linear_2159_2511)"></path><path d="M110.007 135.881C100.538 135.881 92.8615 128.205 92.8615 118.736C92.8615 109.267 100.538 101.591 110.007 101.591C119.476 101.591 127.152 109.267 127.152 118.736C127.152 128.205 119.476 135.881 110.007 135.881Z" fill="url(#paint6_linear_2159_2511)"></path></mask><g mask="url(#mask0_2159_2511)"><rect class="animated-logo" x="-78" width="145" height="512" fill="url(#paint7_linear_2159_2511)"></rect></g><defs><linearGradient id="paint0_linear_2159_2511" x1="321.038" y1="647.556" x2="364.758" y2="717.522" gradientUnits="userSpaceOnUse"><stop stop-color="#909395"></stop><stop offset="100%" stop-color="#ffffff"></stop></linearGradient><linearGradient id="paint1_linear_2159_2511" x1="339.938" y1="500.481" x2="654.646" y2="731.93" gradientUnits="userSpaceOnUse"><stop stop-color="#909395"></stop><stop offset="100%" stop-color="#ffffff"></stop></linearGradient><linearGradient id="paint2_linear_2159_2511" x1="339.938" y1="500.481" x2="654.646" y2="731.93" gradientUnits="userSpaceOnUse"><stop stop-color="#909395"></stop><stop offset="100%" stop-color="#ffffff"></stop></linearGradient><linearGradient id="paint3_linear_2159_2511" x1="339.938" y1="500.481" x2="654.646" y2="731.93" gradientUnits="userSpaceOnUse"><stop stop-color="#909395"></stop><stop offset="100%" stop-color="#ffffff"></stop></linearGradient><linearGradient id="paint4_linear_2159_2511" x1="46.4995" y1="35" x2="214.5" y2="447.5" gradientUnits="userSpaceOnUse"><stop stop-color="#6D7683"></stop><stop offset="12.1084%" stop-color="#838B97"></stop><stop offset="25.3354%" stop-color="#B1B7BD"></stop><stop offset="37.4663%" stop-color="#C3C6CC"></stop><stop offset="48.3689%" stop-color="#F9F9F9"></stop><stop offset="56.8166%" stop-color="#C1C4CA"></stop><stop offset="68.1199%" stop-color="#959CA5"></stop><stop offset="80.8158%" stop-color="#6D7683"></stop><stop offset="91.6233%" stop-color="#5F6672"></stop></linearGradient><linearGradient id="paint5_linear_2159_2511" x1="46.4995" y1="35" x2="214.5" y2="447.5" gradientUnits="userSpaceOnUse"><stop stop-color="#6D7683"></stop><stop offset="12.1084%" stop-color="#838B97"></stop><stop offset="25.3354%" stop-color="#B1B7BD"></stop><stop offset="37.4663%" stop-color="#C3C6CC"></stop><stop offset="48.3689%" stop-color="#F9F9F9"></stop><stop offset="56.8166%" stop-color="#C1C4CA"></stop><stop offset="68.1199%" stop-color="#959CA5"></stop><stop offset="80.8158%" stop-color="#6D7683"></stop><stop offset="91.6233%" stop-color="#5F6672"></stop></linearGradient><linearGradient id="paint6_linear_2159_2511" x1="46.4995" y1="35" x2="214.5" y2="447.5" gradientUnits="userSpaceOnUse"><stop stop-color="#6D7683"></stop><stop offset="12.1084%" stop-color="#838B97"></stop><stop offset="25.3354%" stop-color="#B1B7BD"></stop><stop offset="37.4663%" stop-color="#C3C6CC"></stop><stop offset="48.3689%" stop-color="#F9F9F9"></stop><stop offset="56.8166%" stop-color="#C1C4CA"></stop><stop offset="68.1199%" stop-color="#959CA5"></stop><stop offset="80.8158%" stop-color="#6D7683"></stop><stop offset="91.6233%" stop-color="#5F6672"></stop></linearGradient><linearGradient id="paint7_linear_2159_2511" x1="67" y1="256" x2="-78" y2="256" gradientUnits="userSpaceOnUse"><stop stop-color="white" stop-opacity="0"></stop><stop offset="24%" stop-color="#ffffff" stop-opacity="0.25"></stop><stop offset="50%" stop-color="#ffffff"></stop><stop offset="75%" stop-color="#ffffff" stop-opacity="0.25"></stop><stop offset="100%" stop-color="#ffffff" stop-opacity="0"></stop></linearGradient></defs>
+        </svg>
+    </div>
+
+    <!-- Vertical Navigation (Right Side) -->
+    <!-- Changed border color and text hover to silver -->
+    <aside class="fixed right-8 top-0 h-full z-50 w-16 hidden md:flex flex-col justify-between items-center py-12 border-l border-silver/10 bg-dark/20 backdrop-blur-[1px]">
+        <div class="h-1/3 w-[1px] bg-gradient-to-b from-transparent via-silver/40 to-transparent"></div>
+        
+        <div class="flex flex-col items-center gap-8">
+            <span class="vertical-text font-sans text-xs tracking-[0.2em] text-silver/80 hover:text-white transition-colors cursor-pointer uppercase font-semibold">Menu</span>
+            
+            <!-- Pagination Dots - Silver -->
+            <div class="flex flex-col gap-6 mt-8">
+                <div class="w-1.5 h-1.5 rounded-full bg-silver shadow-[0_0_10px_rgba(212,212,216,0.8)]"></div>
+                <div class="w-1.5 h-1.5 rounded-full border border-silver/40 hover:bg-silver/50 transition-colors cursor-pointer"></div>
+                <div class="w-1.5 h-1.5 rounded-full border border-silver/40 hover:bg-silver/50 transition-colors cursor-pointer"></div>
+                <div class="w-1.5 h-1.5 rounded-full border border-silver/40 hover:bg-silver/50 transition-colors cursor-pointer"></div>
+            </div>
+            
+            <span class="font-serif text-xl text-silver mt-6 italic">01</span>
+        </div>
+
+        <div class="h-1/3 w-[1px] bg-gradient-to-b from-transparent via-silver/40 to-transparent"></div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="content" class="relative z-10 w-full pt-32 pb-20 px-6 sm:px-12 opacity-0 transition-opacity duration-1000">
+        
+        <!-- Hero Section -->
+        <section class="min-h-screen flex items-center justify-center relative">
+            
+            <!-- Big Background Text (Silver) -->
+            <div class="absolute inset-0 flex items-center justify-center z-0 overflow-hidden select-none">
+                <div class="w-full text-center opacity-10 blur-[1px]">
+                    <span class="block font-serif text-[15vw] leading-none text-silver tracking-tighter whitespace-nowrap">FRANKLIN</span>
+                </div>
+            </div>
+
+            <!-- Hero Image/Subject -->
+            <div class="relative z-10 w-full max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
+                
+                <!-- Text Left -->
+                <div class="hidden md:block md:col-span-3 text-right pb-12 fade-in-section delay-300">
+                    <p class="font-sans text-xs uppercase tracking-[0.2em] text-silver/60 mb-2 font-semibold">Projects</p>
+                    <p class="font-serif text-2xl text-white italic">Architecture</p>
+                </div>
+
+                <!-- Main Image Area (Silver/Greyscale border) -->
+                <div class="col-span-1 md:col-span-6 relative group">
+                    <div class="relative overflow-hidden aspect-[3/4] border border-silver/20 shadow-2xl shadow-black">
+                        <!-- Using a high quality Unsplash image with similar vibe -->
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&amp;w=1287&amp;auto=format&amp;fit=crop" alt="Portrait" class="w-full h-full object-cover grayscale brightness-[0.7] contrast-[1.2] group-hover:scale-105 transition-transform duration-1000 ease-out">
+                        
+                        <!-- Inner shadow overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark via-transparent to-transparent opacity-80"></div>
+                    </div>
+                </div>
+
+                <!-- Text Right -->
+                <div class="col-span-1 md:col-span-3 pb-12 fade-in-section delay-500">
+                    <h2 class="font-serif text-4xl md:text-5xl text-white mb-4 tracking-tight leading-none">Franklin <br><span class="text-silver italic">Studio</span></h2>
+                    <p class="font-sans text-sm text-gray-400 leading-relaxed max-w-xs font-light">
+                        Creating iconic, luxurious spaces that redefine elegance through meticulous detail and timeless architecture.
+                    </p>
+                    
+                    <div class="mt-8 flex items-center gap-4 group cursor-pointer">
+                        <div class="w-12 h-[1px] bg-silver/50 group-hover:w-20 transition-all duration-500"></div>
+                        <span class="font-sans text-xs uppercase tracking-widest text-silver font-semibold">View Portfolio</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 fade-in-section delay-700">
+                <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-silver/70">Scroll</span>
+                <i data-lucide="chevron-down" class="text-silver w-5 h-5 animate-bounce stroke-[1.5]"></i>
+            </div>
+        </section>
+
+        <!-- Second Section (Content Demo) -->
+        <section class="min-h-[80vh] flex flex-col items-center justify-center py-24 relative">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="font-sans text-xs text-silver uppercase tracking-[0.25em] mb-4 block font-semibold">Philosophy</span>
+                <h3 class="font-serif text-4xl md:text-6xl text-white tracking-tight">Art of <span class="text-silver/80 italic">Living</span></h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full">
+                <!-- Card 1 -->
+                <div class="group relative p-8 border border-silver/10 hover:border-silver/30 transition-colors duration-500 bg-white/[0.02] fade-in-section">
+                    <div class="mb-6 text-silver opacity-60">
+                        <i data-lucide="gem" class="w-8 h-8 stroke-[1.5]"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-white mb-3">Timeless Luxury</h4>
+                    <p class="font-sans text-base text-neutral-400 font-light leading-relaxed">
+                        Every detail is curated to create an atmosphere of sophisticated opulence that transcends trends.
+                    </p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="group relative p-8 border border-silver/10 hover:border-silver/30 transition-colors duration-500 bg-white/[0.02] fade-in-section delay-100">
+                    <div class="mb-6 text-silver opacity-60">
+                        <i data-lucide="pen-tool" class="w-8 h-8 stroke-[1.5]"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-white mb-3">Bespoke Design</h4>
+                    <p class="font-sans text-base text-neutral-400 font-light leading-relaxed">
+                        Tailored specifically to the lifestyle and desires of the client, ensuring a personal sanctuary.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative p-8 border border-silver/10 hover:border-silver/30 transition-colors duration-500 bg-white/[0.02] fade-in-section delay-200">
+                    <div class="mb-6 text-silver opacity-60">
+                        <i data-lucide="drafting-compass" class="w-8 h-8 stroke-[1.5]"></i>
+                    </div>
+                    <h4 class="font-serif text-2xl text-white mb-3">Architectural Precision</h4>
+                    <p class="font-sans text-base text-neutral-400 font-light leading-relaxed">
+                        A rigorous approach to scale and proportion, harmonizing structure with interior elegance.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Strip -->
+        <footer class="border-t border-silver/10 mt-20 py-12 text-center">
+            <p class="font-serif text-silver text-lg italic">Franklin Studio © 2024</p>
+        </footer>
+
+    </main>
+
+    <script>
+        // --- 1. Logo Animation Logic ---
+        window.onload = () => {
+            const logoContainer = document.getElementById('logo-container');
+            const logoSvg = document.getElementById('main-logo-svg');
+            const content = document.getElementById('content');
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            setTimeout(() => {
+                // Move logo to top position
+                logoContainer.classList.remove('h-full', 'items-center', 'top-0');
+                logoContainer.classList.add('h-24', 'items-start', 'top-6'); // Position at top
+                
+                // Shrink Logo SVG: from h-64 to h-12 (approx 48px)
+                logoSvg.classList.remove('h-64');
+                logoSvg.classList.add('h-12');
+                
+                // Reveal Content
+                setTimeout(() => {
+                    content.classList.remove('opacity-0');
+                    
+                    // Trigger fade-in elements
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('visible');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+
+                    document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+                    
+                }, 800);
+
+            }, 1000); // Initial delay
+        };
+
+
+        // --- 2. Colored Smoke/Haze Canvas Logic (Updated to Silver) ---
+        const canvas = document.getElementById('smokeCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        // Resize canvas
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Particle Class
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 1.5;
+                this.vy = (Math.random() - 0.5) * 1.5 - 1; // Slight upward drift
+                this.life = 1; // Opacity/Life
+                this.decay = Math.random() * 0.01 + 0.005;
+                this.size = Math.random() * 80 + 40;
+                // Silver/White smoke color variations
+                this.color = `hsla(0, 0%, ${70 + Math.random() * 30}%,`; // Pure grayscale
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                this.size += 0.5; // Expand slightly
+            }
+
+            draw(ctx) {
+                const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+                gradient.addColorStop(0, this.color + (this.life * 0.15) + ')'); // Center opacity
+                gradient.addColorStop(1, this.color + '0)'); // Edge opacity
+
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Add particles on mouse move
+        window.addEventListener('mousemove', (e) => {
+            // Add a few particles per frame for density
+            for(let i=0; i<2; i++) {
+                particles.push(new Particle(e.clientX, e.clientY));
+            }
+        });
+
+        // Add particles on scroll (simulated by checking scroll delta)
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            const delta = Math.abs(currentScrollY - lastScrollY);
+            
+            if (delta > 5) {
+                // Spawn particles randomly at bottom or sides during scroll
+                const x = Math.random() * width;
+                const y = height + 50; // Start slightly below
+                particles.push(new Particle(x, Math.random() * height));
+            }
+            lastScrollY = currentScrollY;
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            // Handle Particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw(ctx);
+                
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                    i--;
+                }
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
+
+    </script>
+
+</body></html>
